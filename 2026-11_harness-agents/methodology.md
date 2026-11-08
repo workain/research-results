@@ -2,19 +2,35 @@
 
 ## Task set
 
-9 tasks total:
+9 tasks total, full list with real one-line descriptions in [`tasks.md`](tasks.md):
 
-- **3 synthetic** — built specifically for this test, to allow pinning a known-correct answer.
-- **6 real** — drawn from genuine work (find/explain/report on existing code, or extend it).
+- **3 synthetic** (`T1`, `T2`, `T3`) — purpose-built as controlled tasks for this kind of test.
+  "Synthetic" does not mean abstract or free of real context — `T1` and `T3` both operate on real
+  repository content — it means they were constructed specifically to be run this way, rather
+  than being work anyone needed regardless of measurement.
+- **6 real** (`F`, `M`, `S`, `G`, `H`, `J`) — genuine work requests that existed on their own
+  merits, reused here as the task battery.
 
 Independently of synthetic-vs-real, the same 9 tasks split by **genre**:
 
-- **3 build-from-scratch** tasks (write a function / ship a feature with no prior scaffolding).
-- **6 navigate/report** tasks (locate something, explain how it works, produce a report).
+- **3 build** tasks (`T2`, `G`, `H` — write/fix/port code in the repository; `H` alone builds
+  something from nothing, `T2` and `G` extend or repair an existing artifact).
+- **6 navigate/report** tasks (`T1`, `T3`, `F`, `M`, `S`, `J` — locate something, explain how it
+  works, produce a report, with no required repository change).
 
 This genre split is the axis the round-count finding (see main README, §2) is organized around.
 It was identified after the fact, from the data — not pre-registered — which is why it's
-reported as a pattern worth naming rather than a confirmed hypothesis.
+reported as a pattern worth naming rather than a confirmed hypothesis. The discriminator applied
+to each prompt was textual and checkable: *does the prompt demand a repository change?*
+
+## Task mix is not a workload
+
+Two of the nine tasks (`G` and `H`) alone account for the majority of several agents'
+with-harness token totals in the equalized matrix — up to ~71% for one agent. An aggregate over
+all nine tasks is therefore close to a statement about those two specific tasks, not a balanced
+read across "typical" work. The median per-task ratio is the more honest single number to quote;
+a raw sum (as in `full_results.md` §1) is reported too, but should be read as "what a bill would
+look like if this exact nine-task mix were the real workload," which it isn't.
 
 ## Why the model had to be held constant
 
@@ -58,6 +74,33 @@ The repricing pipeline used here was cross-checked against independently-known-c
 where that figure is independently known to be right) before being trusted for cells where no
 independent check exists.
 
+## Four reporting asymmetries, fixed before any cross-agent number was trusted
+
+All four are properties of how the three agents report themselves — not defects in any
+measurement taken here.
+
+1. **Hermes's "input tokens" field double-counts the cache.** Hermes reports `input_tokens` as
+   the *whole* prompt side of a request, cache-read tokens included. Claude Code and dsh report a
+   true fresh-only remainder for the equivalent field. Summing Hermes's fields naively therefore
+   charges every one of its cached tokens twice. Measured directly: `input_fresh − cache_read −
+   cache_write` leaves a near-zero remainder on every Hermes cell checked (worst case 0.0067% of
+   the field) — the field *is* the sum of the cached components for Hermes, and is not for the
+   other two agents (0 of 54 cross-agent cells showed the same pattern). Within a single agent's
+   own with/without ratio this mostly cancels; across agents it does not cancel at all, and this
+   is exactly the bug that inflated cost by ~10× on affected cells (see the blog post's "ловушки"
+   discussion).
+2. **"Rounds" is three different units across three agents.** Claude Code's own round counter is
+   agent turns, not observable as raw API requests without an independent relay. Hermes's is its
+   own API-call counter. dsh's is raw HTTP requests counted at the wire by a relay. A with/without
+   ratio of "agent turns" and one of "wire HTTP requests" are each meaningful within their own
+   agent and are **not the same quantity** across agents. Every cross-agent statement in this
+   dataset is built on **API requests** (one unit for all three, independently re-derived), never
+   on each agent's own `rounds` field — the two disagree on 16 of 54 equalized cells.
+3. **A pricing-table gap** (described above) — Claude Code reported a cost ≈50× too high on a
+   model it had no price-table row for.
+4. **Disagreeing internal token-usage counters** (described above) — up to ≈25× apart on tasks
+   where Claude Code dispatched subagents.
+
 ## Why every number here is n=1, and what that means for reading it
 
 Every (agent, task, harness-state) cell was run once. Separately, the same exact configuration
@@ -75,6 +118,17 @@ Read every single-cell ratio in the main findings against this table. A reported
 that is smaller than an agent's own repeat-run noise is not yet distinguishable from that agent
 simply being noisy — this applies most to Hermes, whose own noise ceiling (≈9.3×) is close to or
 larger than several of the "effects" discussed in the write-up.
+
+## Why wall-clock time is not reported
+
+Part of this measurement round ran under a memory-cgroup limit on a shared machine that throttled
+one agent's relay mid-run; the affected attempts were discarded and re-run, but the surviving
+wall-clock figures still mix real agent latency with incidental infrastructure load in a way that
+can't be cleanly separated after the fact. No wall-clock number in this dataset is offered as a
+cross-agent or cross-harness latency comparison. Tokens and price were re-derived from each
+provider's own per-request accounting, which is independent of what else was happening on the
+machine at measurement time — that is why this dataset leans on tokens/price/requests and not on
+the clock.
 
 ## What this dataset does not claim
 

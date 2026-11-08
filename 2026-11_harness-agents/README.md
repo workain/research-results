@@ -5,10 +5,11 @@ Backs: **"Харнес по частям, часть 1"** (tellian.io blog, Nove
 ## Setup
 
 - **Agents:** Claude Code, Hermes, DeepSeek Harness (dsh).
-- **Tasks:** 9 total — 3 synthetic (built for the test) + 6 drawn from real work. Independently
-  of that split, the same 9 tasks fall into two genres: 3 are "build" (write a function, ship a
-  feature from scratch), 6 are "navigate/report" (find something in a codebase, explain how it
-  works, produce a report).
+- **Tasks:** 9 total — 3 purpose-built for this kind of test + 6 drawn from real work that
+  existed on its own merits. Independently of that split, the same 9 tasks fall into two genres:
+  3 are "build" (write/fix/port code in the repo), 6 are "navigate/report" (find something in a
+  codebase, explain how it works, produce a report, no required repo change). Full list with real
+  descriptions: [`tasks.md`](tasks.md).
 - **Conditions:** every task run twice per agent — once with a harness (system-prompt rules +
   attached tools), once bare (stock client, no instructions, no tools attached).
 - **Model:** held constant within every comparison that crosses agents — see
@@ -18,7 +19,34 @@ Backs: **"Харнес по частям, часть 1"** (tellian.io blog, Nove
   from an agent's own self-reported total — see `methodology.md`), and task quality by a rubric
   applicable identically across agents.
 
+## Where everything lives
+
+- [`tasks.md`](tasks.md) — all 9 tasks, real one-line descriptions, origin and genre
+  classification, which ones were scored.
+- [`full_results.md`](full_results.md) — every one of the 54 measured cells, not just the ones
+  the blog post discusses, plus the aggregate agent-vs-agent rollup and the confounded
+  native-model table kept separate and clearly labeled.
+- [`equalized_matrix.csv`](equalized_matrix.csv) — the same data, machine-readable.
+- [`methodology.md`](methodology.md) — how the model was pinned, why self-reported cost can't be
+  trusted, the four reporting asymmetries that had to be fixed before any cross-agent number
+  meant anything, and what this dataset does not claim.
+
 ## Findings
+
+### 0. The aggregate picture
+
+Summed over all nine tasks and both harness states — see [`full_results.md`](full_results.md) §1
+for the full table and caveats:
+
+| Agent | Total tokens | Total requests | Quality (out of 8, on the 3 tasks a rubric could score) |
+| --- | --- | --- | --- |
+| Claude Code | 92,752,468 | 562 | 2 |
+| dsh | 84,027,595 | 721 | 3 |
+| Hermes | 43,311,328 | 396 | 1 |
+
+No agent wins on both cost and quality at once in this aggregate. The rest of this document, and
+the blog post, is about why that single table is not the full story — task-level reversals,
+agent-specific noise, and a harness effect whose sign depends on both the task and the agent.
 
 ### 1. Quality never moved between harness states
 
@@ -70,7 +98,7 @@ Measured with the harness held constant (same state on both sides of each compar
 | Property | Claude Code | Hermes | DeepSeek Harness |
 | --- | --- | --- | --- |
 | Repeat-run noise (same config, run twice) | ≈1.2× | ≈9.3× | 1.75×–≥3.5× |
-| Internal self-report consistency | its own two "tokens used" counters disagree by up to ≈25× on tasks where it dispatches subagents | not separately measured | not separately measured |
+| Internal self-report consistency | its own two "tokens used" counters disagree by up to ≈25× on tasks where it dispatches subagents | its "input tokens" field double-counts cache reads, inflating affected cells' recomputed price by ≈10× if taken at face value | matched the independently recomputed price closely across all 18 of its arms — no comparable correction needed |
 | Cost drop, expensive → cheap model tier, same tasks | ≈9× cheaper | ≈56× cheaper | n/a (only ever run on the cheap tier here) |
 | Quality at the one discriminating task, cheap tier | 1/2 | 0/2, zero files changed in either run | 2/2 |
 

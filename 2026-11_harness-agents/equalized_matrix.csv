@@ -1,0 +1,55 @@
+task,agent,state,tokens,requests,tokens_per_request,files_changed,quality
+T1,Claude Code,without,2010765,17,118280,0,unscored (Tier C)
+T1,Claude Code,with,1474336,13,113410,0,unscored (Tier C)
+T1,Hermes,without,1166075,18,64781,0,unscored (Tier C)
+T1,Hermes,with,685627,11,62329,0,unscored (Tier C)
+T1,dsh,without,6002908,58,103498,0,unscored (Tier C)
+T1,dsh,with,3042047,36,84501,0,unscored (Tier C)
+T2,Claude Code,without,3087128,28,110254,0,1/2
+T2,Claude Code,with,2384109,19,125479,4,1/2
+T2,Hermes,without,1381882,19,72730,2,1/2
+T2,Hermes,with,1374361,22,62470,3,1/2
+T2,dsh,without,1539441,29,53084,2,1/2
+T2,dsh,with,1268563,21,60407,3,1/2
+T3,Claude Code,without,787447,10,78744,0,unscored (Tier C)
+T3,Claude Code,with,1016364,10,101636,0,unscored (Tier C)
+T3,Hermes,without,480883,12,40073,0,unscored (Tier C)
+T3,Hermes,with,416038,8,52004,0,unscored (Tier C)
+T3,dsh,without,394505,13,30346,0,unscored (Tier C)
+T3,dsh,with,811153,15,54076,0,unscored (Tier C)
+F,Claude Code,without,3478327,32,108697,0,unscored (Tier C)
+F,Claude Code,with,4290925,32,134091,0,unscored (Tier C)
+F,Hermes,without,1073282,19,56488,0,unscored (Tier C)
+F,Hermes,with,2445184,24,101882,0,unscored (Tier C)
+F,dsh,without,4381228,39,112339,0,unscored (Tier C)
+F,dsh,with,5755401,50,115108,0,unscored (Tier C)
+M,Claude Code,without,2251356,20,112567,0,unscored (Tier C)
+M,Claude Code,with,1597109,12,133092,0,unscored (Tier C)
+M,Hermes,without,527493,9,58610,0,unscored (Tier C)
+M,Hermes,with,1072010,11,97455,0,unscored (Tier C)
+M,dsh,without,4510055,43,104885,0,unscored (Tier C)
+M,dsh,with,1544515,19,81290,0,unscored (Tier C)
+S,Claude Code,without,4266302,37,115305,0,unscored (Tier C)
+S,Claude Code,with,4323752,33,131022,0,unscored (Tier C)
+S,Hermes,without,4208087,35,120231,0,unscored (Tier C)
+S,Hermes,with,1842159,17,108362,0,unscored (Tier C)
+S,dsh,without,3481285,43,80960,0,unscored (Tier C)
+S,dsh,with,3856336,41,94056,0,unscored (Tier C)
+G,Claude Code,without,11143356,67,166318,7,1/2
+G,Claude Code,with,10494011,55,190800,5,1/2
+G,Hermes,without,2472066,25,98882,0,0/2
+G,Hermes,with,10652732,56,190227,0,0/2
+G,dsh,without,8083359,54,149691,5,2/2
+G,dsh,with,9220476,62,148717,8,2/2
+H,Claude Code,without,8933538,53,168557,5,unscored (Tier C)
+H,Claude Code,with,29608735,104,284699,9,unscored (Tier C)
+H,Hermes,without,4519483,35,129128,8,unscored (Tier C)
+H,Hermes,with,8119562,53,153199,9,unscored (Tier C)
+H,dsh,without,12127483,71,170809,9,unscored (Tier C)
+H,dsh,with,16293199,86,189455,19,unscored (Tier C)
+J,Claude Code,without,301212,6,50202,0,0/4
+J,Claude Code,with,1303696,14,93121,0,0/4
+J,Hermes,without,693123,17,40771,0,0/4
+J,Hermes,with,181281,5,36256,0,0/4
+J,dsh,without,666655,23,28985,0,0/4
+J,dsh,with,1048986,18,58277,0,0/4
