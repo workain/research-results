@@ -18,7 +18,7 @@ Backs: **«Почему ИИ щёлкает ваши тесты на 100% — и
 - [`tasks.md`](tasks.md) — catalog of all question families, structural interference mechanisms, and mechanical/DOM copy defenses with concrete "Before vs. After" examples.
 - [`full_results.md`](full_results.md) — complete breakdown of all 138 experimental runs across Pilots `v1–v4` and Rounds `1–11`, plus the cross-model structural interference breakdown (`Claude Sonnet 5.5` vs. `GPT-6.1 Sol` vs. `Gemini 3 Flash`).
 - [`all_experiments_matrix.csv`](all_experiments_matrix.csv) — machine-readable dataset of all 138 runs.
-- [`blog_post_ru.md`](blog_post_ru.md) — Russian blog article (~1,400 words) with literature citations, failed vs. successful approaches, and practical engineering takeaways.
+- [`blog_post_ru.md`](blog_post_ru.md) — Russian blog article (~1,540 words) with literature citations, failed vs. successful approaches, and practical engineering takeaways.
 - [`cross_model_evidence.md`](cross_model_evidence.md) — exact cross-model observations that were actually completed; explicitly separates them from the unfinished 20×3×3 benchmark.
 
 ---
