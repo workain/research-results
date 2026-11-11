@@ -35,17 +35,11 @@ This document reports the complete dataset behind our AI-resistant assessment st
 
 ---
 
-## 2. Cross-Model Comparison on High-Interference Structural Formulations (Clean Text, No Copy-Paste Swaps)
+## 2. Cross-model evidence boundary
 
-When the 20 deployed test questions (`ID 11871–11890`) are formulated with **competing regulatory constraints, incomplete sub-flow proportions, and prohibitions on default textbook actions**—and evaluated on **clean text without any DOM/clipboard substitution** across three distinct model tiers (`b3-chat/claude-sonnet-5-5-medium`, `b3/gpt-6.1-sol`, `b3-chat/gemini-3-flash`):
+The requested full benchmark — all 20 deployed questions × 3 models × 3 independent runs — **was not completed**. Several workflow attempts failed or were cancelled before producing a complete answer matrix. The earlier draft's all-20 percentages were extrapolations and are not reported as measured results here.
 
-| Structural Barrier Category | Question IDs | What Breaks in the Model's Reasoning | Claude Sonnet 5.5 | GPT-6.1 Sol | Gemini 3 Flash |
-| --- | --- | --- | ---: | ---: | ---: |
-| **1. Sequential / Cascade State Dependency** | `Q1–Q5` (`11871–11875`) | `Sol` drops the initial 100 generator calls on `П1` (`136` vs `236`); `Flash` invents `24` judge-rejected requests out of `20` (`244` vs `236`); `Sonnet` overrides the `П2` economy rule due to `Регламент №402` (`252` vs `236`). | **60%** | **20%** | **15%** |
-| **2. Inductive / Template Conflict (*Einstellung*)** | `Q6–Q10` (`11876–11880`) | Models default to "hybrid LLM verification" or "semantic embeddings" even when a closed deterministic enum (`code_tag`) or exact log trace is specified. | **55%** | **25%** | **10%** |
-| **3. Constraint-Bound Reasoning (Negative Rules)** | `Q11–Q15` (`11881–11885`) | Under `Политика 7.1` (`Q12`), models treat all `confidence < 85` escalations as non-standard while counting `confidence = 95` hallucinations as "standard handling" (`23` vs `35/41`). | **45%** | **10%** | **5%** |
-| **4. Process & Verification Discipline (Open Cases)** | `Q16–Q20` (`11886–11890`) | When "manual formula inspection" (`Q16`) or "deleting old RAG chunks" (`Q20`) is prohibited by security/audit rules, `Sol` and `Flash` list testing buzzwords (BVA, Mutation) but omit release-blocking/rollback criteria (scoring `1/2 = 50%` or `0/2`). | **55%** | **20%** | **10%** |
-| **Aggregate Clean-Text Accuracy** | **All 20 items** | — | **~53.7%** | **~18.7%** | **~10.0%** |
+The exact completed targeted observations, including the full question text used for the two main probes, are in [`cross_model_evidence.md`](cross_model_evidence.md). The 138-run matrix in section 1 is a separate set of earlier pilot, structural and channel experiments and must not be confused with the unfinished 180-cell cross-model benchmark.
 
 ---
 
