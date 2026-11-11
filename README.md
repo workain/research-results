@@ -12,6 +12,7 @@ backs ships; it is not updated retroactively except to fix an error.
 | Folder | Backs the article | Scope |
 | --- | --- | --- |
 | [`2026-11_harness-agents/`](2026-11_harness-agents/) | "Харнес по частям", part 1 | 3 coding agents (Claude Code, Hermes, DeepSeek Harness) × 9 tasks × with/without a harness: tokens, rounds, cost, quality |
+| [`2026-11_ai-resistant-assessment/`](2026-11_ai-resistant-assessment/) | AI-resistant assessment experiments | 138 runs across 11 rounds: clean-text reasoning, structural interference, Unicode/DOM clipboard channels, methodology, raw matrix and Russian blog draft |
 
 ## Related
 
