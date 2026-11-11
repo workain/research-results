@@ -34,6 +34,29 @@ The question is under-specified unless the split of the 32 passing the second co
 - Sol: supplied an independent oracle, boundary/property/mutation tests and automated gates, but did not explicitly state the release-blocking action for a failed boundary check. Assessed as partial credit under the targeted rubric.
 - Flash: supplied property-based, mutation, golden-master and boundary testing, but did not explicitly state the release-blocking action. Assessed as partial credit under the targeted rubric.
 
+### Result table for the completed targeted probe
+
+| Question | Sonnet 5.5 | Sol | Gemini Flash | Evidence status |
+| --- | --- | --- | --- | --- |
+| Q1 cascade | 236 under an explicit 16/16 assumption | `120 + x`, then 136 under the same assumption | 244 | one clean response per model; Q1 is under-specified |
+| Q16 verification | full/near-full rubric coverage | partial: no explicit release block | partial: no explicit release block | one clean open-answer response per model |
+
+### Verbatim answer excerpts retained from the run
+
+**Q1 — Sonnet:** “Предполагаю, что 80% прохождения кода распределяются между группами поровну, по 16 в каждой… Всего **236 вызовов LLM**.”
+
+**Q1 — Sol:** “вызовы LLM = 80 (J на П1) + 40 (генерация П2) + x… Итого: **120 + x**. Если принять равномерные 80% для обеих групп: x=16, итого **136 вызовов**.”
+
+**Q1 — Flash:** “8 запросов, отклоненных на П1 кодом… **24 запроса**, отклоненных на П1 судьёй… Всего… **244** вызова LLM.”
+
+**Q16 — Sonnet:** described an independent specification, boundary-value tests, an independent oracle, property/differential testing, mutation testing, traceability and CI gates.
+
+**Q16 — Sol:** described an independent oracle, boundary/property/mutation tests and automated gates, but omitted an explicit release-blocking action when a boundary check fails.
+
+**Q16 — Flash:** described property-based, mutation, golden-master and boundary testing, but likewise omitted an explicit release-blocking action.
+
+These are the actual cross-model details currently available. There are no completed per-question Sol/Flash outputs for Q2–Q15 or Q17–Q20 in this dataset.
+
 ## Targeted strategic reformulation: Sonnet only
 
 ### Q1 with a named optimisation policy
